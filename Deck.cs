@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class Deck
+class Deck //responsibe for deck generation and shuffling
 {
     private List<string> Cards { get; set; }
     public Deck()
