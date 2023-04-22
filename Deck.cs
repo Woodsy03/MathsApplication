@@ -7,18 +7,32 @@ class Deck //responsibe for deck generation and shuffling
     public Deck()
     {
         GenerateDeck();
-        Shuffle();
+        //Shuffle();
     }
 
-    private void GenerateDeck()
+    public object[] GenerateDeck()
     {
-        List<string> numbers = new List<string>() { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "King", "Queen", "Ace" };
-        List<string> suites = new List<string>() { "Hearts", "Spades", "Clubs", "Diamonds" };
+        var random = new Random();
 
-        Cards = new List<string>();
-        foreach (string suite in suites)
-            foreach (string number in numbers)
-                Cards.Add(number + " of " + suite);
+        List<string> numbers = new List<string>() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        List<string> operand = new List<string>() { "*", "/", "-", "+" };
+
+        int Rand1Index = random.Next(numbers.Count);
+        int Rand2Index = random.Next(numbers.Count);
+        int RandOperandIndex = random.Next(operand.Count);
+        string ChosenOperand = operand[RandOperandIndex];
+
+        string Rand1 = numbers[Rand1Index];
+        string Rand2 = numbers[Rand2Index];
+
+        object[] Cards = new object[]
+        {
+            Rand1,
+            Rand2,
+            ChosenOperand
+        };
+
+        return Cards;
     }
 
     private void Shuffle()

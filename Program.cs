@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathsApplication;
+using System;
 
 class Program
 {
@@ -7,6 +8,12 @@ class Program
         Console.WriteLine("Application Starting. Welcome.");
 
         Tutorial tutorial = new Tutorial();
-        tutorial.Introduction(); // Call the static Introduction method directly on the Tutorial class
+        tutorial.Introduction();
+
+        Deck deck = new Deck();
+        object[] Cards = deck.GenerateDeck();
+
+        InteractiveSolving solving = new InteractiveSolving();
+        solving.quiz();
     }
 }
