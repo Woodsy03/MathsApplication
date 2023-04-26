@@ -1,34 +1,51 @@
 ﻿using MathsApplication;
 using System;
 
-class menu
+class Menu
 {
     public static void Main(string[] args)
     {
         Console.WriteLine("Application Starting. Welcome.");
-        Boolean ValidOption = false;
-        Boolean ContinuePlaying = true;
+        bool validOption = false;
+        bool continuePlaying = true;
 
-        while (ValidOption = false);    
-            Console.WriteLine("please choose one of the following options: ");
+        while (!validOption)
+        {
+            Console.WriteLine("Please choose one of the following options:");
             Console.WriteLine("Instructions");
             Console.WriteLine("Play");
             Console.WriteLine("Quit");
-        string MenuOption = Console.ReadLine();
+            string menuOption = Console.ReadLine();
+            menuOption = menuOption.ToLower();
 
+            switch (menuOption)
+            {
+                case "instructions":
+                    Tutorial tutorial = new Tutorial();
+                    tutorial.Introduction();
+                    Thread.Sleep(4000);
+                    validOption = false;
+                    break;
+                case "play":
+                    validOption = true;
+                    CardDeck deck = new CardDeck();
+                    Stacks stacks = deck.GenerateDeck();
 
-        Tutorial tutorial = new Tutorial();
-        tutorial.Introduction();
-
-        CardDeck deck = new CardDeck();
-        Stacks stacks = deck.GenerateDeck();
-
-        
-        if (ContinuePlaying = true)
-        {
-            InteractiveSolving solving = new InteractiveSolving();
-            solving.quiz(stacks);
+                    if (continuePlaying)
+                    {
+                        InteractiveSolving solving = new InteractiveSolving();
+                        solving.Quiz(stacks);
+                    }
+                    break;
+                case "quit":
+                    validOption = true;
+                    Tutorial tutorialQuit = new Tutorial();
+                    tutorialQuit.Exit();
+                    break;
+                default:
+                    Console.WriteLine("That is not a valid option.");
+                    break;
+            }
         }
-        
-        }
+    }
 }

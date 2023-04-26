@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace MathsApplication
 {
-    internal class InteractiveSolving
+    public class InteractiveSolving
     {
         
-        public void quiz(Stacks stacks)
+        public void Quiz (Stacks stacks)
         {
-            Console.WriteLine(stacks);
-
+            Console.WriteLine("Here's the solving part");
         }
 
     }
