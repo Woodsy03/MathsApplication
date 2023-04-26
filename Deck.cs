@@ -1,50 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class Deck //responsibe for deck generation and shuffling
-{
-    private List<string> Cards { get; set; }
-    public Deck()
-    {
-        GenerateDeck();
-        //Shuffle();
-    }
 
-    public object[] GenerateDeck()
+public class Stacks //this is solely for get; set; - i have intentionally done two classes in one file as it's much cleaner and easier to understand.
+{
+    public List<string> NumberStack { get; set; }
+    public List<string> OperandStack { get; set; }
+} 
+public class CardDeck // Responsible for deck generation and shuffling
+{
+    public Stacks GenerateDeck()
     {
         var random = new Random();
 
-        List<string> numbers = new List<string>() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-        List<string> operand = new List<string>() { "*", "/", "-", "+" };
+        List<string> numbers = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+        List<string> operands = new List<string>() { "*", "/", "-", "+" };
+        List<string> NumberStack = new List<string>();
+        List<string> OperandStack = new List<string>();
 
-        int Rand1Index = random.Next(numbers.Count);
-        int Rand2Index = random.Next(numbers.Count);
-        int RandOperandIndex = random.Next(operand.Count);
-        string ChosenOperand = operand[RandOperandIndex];
-
-        string Rand1 = numbers[Rand1Index];
-        string Rand2 = numbers[Rand2Index];
-
-        object[] Cards = new object[]
+        // Generate random number stack
+        for (int i=0; i < 100; i++)
         {
-            Rand1,
-            Rand2,
-            ChosenOperand
+            int temp = random.Next(0,10);
+            NumberStack.Add(numbers[temp]); 
+        }
+
+        // Generate random operand stack
+        for (int i=0; i < 50; i++)
+        {
+            int tempOperand = random.Next(0, 4);
+            OperandStack.Add(operands[tempOperand]);
+
+        }
+
+        // Merging both stacks into a single return variable
+        Stacks stacks = new Stacks
+        {
+            NumberStack = NumberStack,
+            OperandStack = OperandStack
         };
 
-        return Cards;
+        return stacks;
     }
-
-    private void Shuffle()
-    {
-        Random rnd = new Random();
-        for (int i = Cards.Count - 1; i > 0; i--)
-        {
-            int randomIndex = rnd.Next(0, i + 1);
-            string temp = Cards[i];
-            Cards[i] = Cards[randomIndex];
-            Cards[randomIndex] = temp;
-        }
-    }
-
 }

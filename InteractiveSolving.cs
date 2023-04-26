@@ -9,9 +9,9 @@ namespace MathsApplication
     internal class InteractiveSolving
     {
         
-        public void quiz()
+        public void quiz(Stacks stacks)
         {
-            Console.WriteLine("the interactive part has been reached");
+            Console.WriteLine(stacks);
 
         }
 
