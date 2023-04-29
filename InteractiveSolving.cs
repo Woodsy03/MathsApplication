@@ -11,6 +11,13 @@ namespace MathsApplication
 
         public void Quiz(Stacks stacks)
         {
+
+            if (stacks == null || stacks.NumberStack == null || stacks.OperandStack == null)
+            {
+                Console.WriteLine("Stack object has been incorrectly manipulated, handling exception");
+                return;
+            }
+
             Console.WriteLine("Please solve the following");
             if (stacks.OperandStack[0] == "/") //targeted at 6-7 year olds so all decimals have been removed
             {
@@ -18,8 +25,42 @@ namespace MathsApplication
                 {
                     stacks.NumberStack.RemoveAt(0);
                 }
-            int correcttAnswer = AnswerCalculation(stacks);
+
             }
+            Console.WriteLine(stacks.NumberStack[0] + " " + stacks.OperandStack[0] + " " + stacks.NumberStack[1]);
+
+            int correctAnswerInt = AnswerCalculation(stacks);
+            string correctAnswer = correctAnswerInt.ToString();
+            string UserAnswer = "N/A"; //OOB value
+            bool IsAnswerANumber;
+            int ParsedValue;
+
+            while (correctAnswer != UserAnswer)
+            {
+                Console.WriteLine("Please enter your answer below");
+                UserAnswer = Console.ReadLine();
+                IsAnswerANumber = int.TryParse(UserAnswer, out ParsedValue);
+                
+                if (IsAnswerANumber == false)
+                {
+                    Console.WriteLine("That's not a number sorry, please try again.");
+                }
+                else
+                {
+                    if (correctAnswer != UserAnswer)
+                    {
+                        Console.WriteLine("I'm sorry, that wasn't the correct answer");
+                    }
+                    else
+                    {
+                        Console.WriteLine("That's correct, good job!");
+                        QuizRecursion();
+                    }
+                }
+                
+            }
+
+
         }
 
         private int AnswerCalculation(Stacks stacks)
@@ -43,7 +84,7 @@ namespace MathsApplication
             return CorrectAnswer;
         }
 
-        internal void QuizRecursion()
+        private void QuizRecursion()
         {
             Console.WriteLine("would you like to play again? Yes/No");
             string PlayAgain = Console.ReadLine();
