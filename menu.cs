@@ -1,5 +1,8 @@
-﻿using MathsApplication;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using MathsApplication;
 
 class Menu
 {
@@ -7,7 +10,6 @@ class Menu
     {
         Console.WriteLine("Application Starting. Welcome.");
         bool validOption = false;
-        bool continuePlaying = true;
 
         while (!validOption)
         {
@@ -21,26 +23,33 @@ class Menu
             switch (menuOption)
             {
                 case "instructions":
-                    Tutorial tutorial = new Tutorial();
+                    Instruction tutorial = new Instruction();
                     tutorial.Introduction();
                     Thread.Sleep(4000);
                     validOption = false;
                     break;
                 case "play":
-                    validOption = true;
-                    CardDeck deck = new CardDeck();
-                    Stacks stacks = deck.GenerateDeck();
+                    validOption = false;
+                    BogoShuffle shuffle = new BogoShuffle();
+                    List<string> deck = shuffle.GenerateDeck();
+                    shuffle.Shuffle(deck);
 
-                    if (continuePlaying)
-                    {
-                        InteractiveSolving solving = new InteractiveSolving();
-                        solving.Quiz(stacks);
-                    }
+                    List<int> numberStack = deck.Select(card => int.Parse(card.Split(' ')[0])).ToList();
+                    string suites = deck[2];
+                    string[] suitesSplit = suites.Split(' ');
+                    string operand = suitesSplit[2];
+
+                    List<string> operandStack = new List<string> { operand };
+                    Stacks stacks = new Stacks { NumberStack = numberStack, OperandStack = operandStack };
+
+                    InteractiveSolving solving = new InteractiveSolving();
+                    solving.Quiz(stacks);
                     break;
+
                 case "quit":
                     validOption = true;
-                    Tutorial tutorialQuit = new Tutorial();
-                    tutorialQuit.Exit();
+                    Instruction instructionQuit = new Instruction();
+                    instructionQuit.Exit();
                     break;
                 default:
                     Console.WriteLine("That is not a valid option.");
