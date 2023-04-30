@@ -30,7 +30,7 @@ class Menu
                     break;
                 case "play":
                     validOption = false;
-                    BogoShuffle shuffle = new BogoShuffle();
+                    pack shuffle = new pack();
                     List<string> deck = shuffle.GenerateDeck();
                     shuffle.Shuffle(deck);
 

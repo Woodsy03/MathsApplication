@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MathsApplication
 {
-    public class BogoShuffle : DeckGeneration
+    public class pack : Card
     {
         public override void Shuffle(List<string> deck)
         {

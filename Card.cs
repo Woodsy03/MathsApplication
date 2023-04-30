@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MathsApplication
 {
-    public abstract class DeckGeneration
+    public abstract class Card
     {
         public abstract void Shuffle(List<string> deck);
 
