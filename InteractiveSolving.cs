@@ -9,7 +9,7 @@ public class InteractiveSolving
 {
     protected Stacks stacks;
 
-    public void Quiz(Stacks inputStacks)
+    public virtual void Quiz(Stacks inputStacks)
     {
         stacks = inputStacks;
 
@@ -78,13 +78,13 @@ public class InteractiveSolving
         }
     }
 
-    private bool QuizRecursion()
+    protected bool QuizRecursion()
     {
         Recursion recursion = new Recursion();
         return recursion.QuizRecursion();
     }
 
-    private int AnswerCalculation(Stacks stacks)
+    protected virtual int AnswerCalculation(Stacks stacks)
     {
         int CorrectAnswer = 0;
         switch (stacks.OperandStack[0])
