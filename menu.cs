@@ -72,6 +72,7 @@ class Menu
                 default:
                     Console.WriteLine("That is not a valid option.");
                     break;
+
             }
         }
     }
